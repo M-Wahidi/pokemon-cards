@@ -4,15 +4,12 @@ import PokemonCard from "./PokemonCard";
 import { TailSpin } from "react-loader-spinner";
 
 function App() {
-  const API_URL = " https://pokeapi.co/api/v2/pokemon/?offset=0&limit=12&count=50";
+  const [pagination,setPagination] = useState(0)
   const [pokemons, setPokemons] = useState([]);
   const [searchInput, setSeachInput] = useState("");
   const [filterdPokemon, setFilterdPokemon] = useState([]);
-  const [prevPage, setPrevPage] = useState(null);
-  const [nextPage, setNextPage] = useState(null);
-  const [pageCounter, setPageCounter] = useState(1);
   const [loading, setLoading] = useState(false);
-
+  const API_URL = `https://pokeapi.co/api/v2/pokemon/?offset=${pagination}&limit=12&count=50`;
   useEffect(() => {
     const getPokmeonName = () => {
       setLoading(true);
@@ -20,26 +17,17 @@ function App() {
         const resp = await fetch(API_URL);
         const data = await resp.json();
         setPokemons(data.results.map((elem) => elem.name));
-        setNextPage(data.next);
         setLoading(false);
       }, 500);
     };
     getPokmeonName();
-  }, []);
+  }, [pagination,API_URL]);
+
 
   const fetchNextPrevPokemon = (e) => {
     setSeachInput("");
-    setLoading(true);
-    const clickedBtn = e.target.innerHTML;
-    setTimeout(async () => {
-      const resp = await fetch(clickedBtn === "NEXT" ? nextPage : prevPage);
-      const data = await resp.json();
-      setPokemons(data.results.map((elem) => elem.name));
-      setNextPage(data.next);
-      setPrevPage(data.previous);
-      setLoading(false);
-      setPageCounter((prev) => (clickedBtn === "NEXT" ? prev + 1 : prev - 1));
-    }, 500);
+    const clickedBtn = e.target.innerHTML
+    clickedBtn === 'NEXT' ? setPagination(prev => prev + 20) : setPagination(prev => prev - 20)
   };
 
   const searchPokemon = () => {
@@ -74,7 +62,7 @@ function App() {
 
       {!loading && (
         <div className='change-page-btn'>
-          {pageCounter > 1 && (
+          {pagination >= 20 && (
             <button className='btn' onClick={(e) => fetchNextPrevPokemon(e)}>
               PREV
             </button>
