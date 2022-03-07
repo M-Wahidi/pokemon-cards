@@ -9,6 +9,7 @@ function App() {
   const [searchInput, setSeachInput] = useState("");
   const [filterdPokemon, setFilterdPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const API_URL = `https://pokeapi.co/api/v2/pokemon/?offset=${pagination}&limit=12&count=50`;
   useEffect(() => {
     const getPokmeonName = () => {
@@ -21,26 +22,21 @@ function App() {
       }, 500);
     };
     getPokmeonName();
+    setSeachInput("");
   }, [pagination,API_URL]);
 
 
-  const fetchNextPrevPokemon = (e) => {
-    setSeachInput("");
-    const clickedBtn = e.target.innerHTML
-    clickedBtn === 'NEXT' ? setPagination(prev => prev + 20) : setPagination(prev => prev - 20)
-  };
-
-  const searchPokemon = () => {
-    const filteredPokeoms = pokemons.filter((pokemon) =>
-      pokemon.toLowerCase().includes(searchInput.toLocaleLowerCase())
-    );
-    setFilterdPokemon(filteredPokeoms);
-  };
-
   useEffect(() => {
-    searchPokemon();
+    const searchPokemon = () => {
+      const filteredPokeoms = pokemons.filter((pokemon) =>
+        pokemon.toLowerCase().includes(searchInput.toLocaleLowerCase())
+      );
+      setFilterdPokemon(filteredPokeoms);
+    };
+    searchPokemon()
   }, [searchInput]);
 
+  
   return (
     <div>
       <h1 className='title'>Pokemon Card</h1>
@@ -63,11 +59,11 @@ function App() {
       {!loading && (
         <div className='change-page-btn'>
           {pagination >= 20 && (
-            <button className='btn' onClick={(e) => fetchNextPrevPokemon(e)}>
+            <button className='btn' onClick={(e) => setPagination(prev => prev - 20)}>
               PREV
             </button>
           )}
-          <button className='btn' onClick={(e) => fetchNextPrevPokemon(e)}>
+          <button className='btn' onClick={(e) => setPagination(prev => prev + 20)}>
             NEXT
           </button>
         </div>
