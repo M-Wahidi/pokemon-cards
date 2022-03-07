@@ -2,7 +2,7 @@
   "name": "pokemon-cards",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://M-Wahidi.github.io",
+  "homepage": "https://M-Wahidi.github.io/pokemon-cards/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
