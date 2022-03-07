@@ -42,19 +42,28 @@ function App() {
     }, 500);
   };
 
-  const setFilterPokemons = (e) => {
-    setSeachInput(e.target.value);
+  const searchPokemon = () => {
     const filteredPokeoms = pokemons.filter((pokemon) =>
       pokemon.toLowerCase().includes(searchInput.toLocaleLowerCase())
     );
     setFilterdPokemon(filteredPokeoms);
   };
 
+  useEffect(() => {
+    searchPokemon();
+  }, [searchInput]);
+
   return (
     <div>
       <h1 className='title'>Pokemon Card</h1>
       <div className='search_pokemon'>
-        <input type='search' value={searchInput || ""} onChange={(e) => setFilterPokemons(e)} />
+        <input
+          type='search'
+          value={searchInput || ""}
+          onChange={(e) => {
+            setSeachInput(e.target.value);
+          }}
+        />
       </div>
       <div className='content'>
         {searchInput !== "" &&
