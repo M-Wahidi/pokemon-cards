@@ -1,39 +1,37 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.title{
+.title {
   text-align: center;
   font-size: 2rem;
 }
 
-.content{
+.content {
   display: flex;
   justify-content: center;
   gap: 3rem;
   flex-wrap: wrap;
-  margin:  0 auto;
+  margin: 0 auto;
   max-width: 1200px;
   background-color: #fff;
   text-align: center;
   padding: 1rem 0;
 }
 
-
-.card{
+.card {
   width: 250px;
   height: 350px;
   background-color: antiquewhite;
   position: relative;
   border-radius: 10px;
 }
-.card::before{
-  content: ' ';
+.card::before {
+  content: " ";
   background-color: rgba(0, 10, 19, 0.1);
   border-radius: 100%;
   width: 250px;
@@ -41,30 +39,55 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
-.pokemon_name{
+.pokemon_name {
   font-size: 1.2rem;
 }
 
-.card .image{
+.card .image {
   width: 250px;
   height: 250px;
 }
-.card img{
+.card img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-.search_pokemon{
-  margin:  0 auto;
+.search_pokemon {
+  margin: 0 auto;
   display: flex;
   justify-content: center;
+  padding-bottom: 1rem;
 }
-.search_pokemon input{
+.search_pokemon input {
   width: 250px;
-  height: 30px;
+  height: 40px;
   border-radius: 5px;
-  padding-left: .5rem;
-  border: 1px solid rgb(197, 133, 14) ;
+  padding-left: 0.5rem;
+  border: 1px solid rgb(197, 133, 14);
+}
+.change-page-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.btn {
+  border: none;
+  background-color: orangered;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.56rem 2rem;
+  cursor: pointer;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
 }
